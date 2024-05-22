@@ -1,0 +1,32 @@
+DocuFetch is a way to bulk download all envelopes from your DocuSign account, as they don't offer a easy method to do it.
+
+Keep in mind that:
+
+* By default it downloads only completed envelopes
+* Count is not implemented yet, so if you have dozens of documents, you might need to run it a couple times (and delete the downloaded files after each run)
+* There are basically no error checking so double check the downloaded files to make sure they are ok
+* If you have documents with the same name, it will overwrite them
+* It works for me, YMMV.
+
+To run it, use venv:
+
+mkdir docs
+python3 -m venv DocuFetch
+cd DocuFetch
+source bin/activate
+
+Install the required libs using pip:
+
+pip install -r requirements.txt
+
+To capture the authentication cookies, run:
+
+python capture_cookies.py
+
+It will open a browser window and launch Docusign. Login to your account and click on "Completed". At this point it will grab the cookies and close the window automatically.
+
+Now run:
+
+python docufetch.py
+
+It will try to login to your Docusign account, fetch the list of envelopes and start downloading them. It might take a while to it fully download everything.
